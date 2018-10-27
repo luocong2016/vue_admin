@@ -31,8 +31,6 @@
 </template>
 
 <script>
-import fetch from '@/utils/fetch';
-console.log(fetch.get('/test/echarts?c=line-graphic').then( res => console.log(res)));
 export default {
   name: "HelloWorld",
   props: {

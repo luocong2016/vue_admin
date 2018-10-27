@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Message } from 'element-ui';
+import { Message, MessageBox } from 'element-ui';
 import storage from './storage';
 
 const Axios = axios.create({
@@ -20,16 +20,57 @@ Axios.interceptors.request.use(
 
 Axios.interceptors.response.use(
   response => {
-    const res = response.data;
-    return res;
+    const { data, status } = response;
+
+    // Token
+    if (status === 401 || data.code == 401 || data.sataus == 401) {
+      MessageBox.alert(
+        '你已被登出，可以取消继续留在该页面，或者重新登录',
+        '确定登出',
+        {
+          confirmButtonText: '重新登录',
+          type: 'warning'
+        }
+      ).then(() => {
+        location.reload();
+      });
+    }
+
+    // Success
+    // response.data
+    if (data.code == 0 || data.status == 0) {
+      Message({
+        message: data.message || data.msg || '网络请求出现错误!',
+        type: 'error',
+        duration: 5 * 1000
+      });
+    }
+
+    return data;
   },
   error => {
+    if (error.response.status === 401) {
+      MessageBox.alert(
+        '你已被登出，可以取消继续留在该页面，或者重新登录',
+        '确定登出',
+        {
+          confirmButtonText: '重新登录',
+          type: 'warning'
+        }
+      ).then(() => {
+        // integrant
+        location.reload();
+      });
+      return Promise.reject(error);
+    }
+
     Message({
       message: error.message,
       type: 'error',
       duration: 5 * 1000
     });
-    Promise.reject(error);
+
+    return Promise.reject(error);
   }
 );
 
