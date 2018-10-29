@@ -23,7 +23,7 @@ Axios.interceptors.response.use(
     const { data, status } = response;
 
     // Token
-    if (status === 401 || data.code == 401 || data.sataus == 401) {
+    if (data.code == 401 || data.sataus == 401 || status === 401) {
       MessageBox.alert(
         '你已被登出，可以取消继续留在该页面，或者重新登录',
         '确定登出',
