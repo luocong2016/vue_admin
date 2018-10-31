@@ -1,5 +1,6 @@
-const storageType = window.sessionStorage;
-const storage = {
+const storageType = sessionStorage;
+
+export const storage = {
   setItem: function(k, v) {
     storageType.setItem(k, v);
   },
@@ -13,5 +14,3 @@ const storage = {
     storageType.clear();
   }
 };
-
-export default storage;

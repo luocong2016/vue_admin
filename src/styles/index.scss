@@ -101,3 +101,13 @@ body {
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
     Microsoft YaHei, Arial, sans-serif;
 }
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+#app {
+  min-height: 768px;
+}

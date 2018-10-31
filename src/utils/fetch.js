@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Message, MessageBox } from 'element-ui';
-import storage from './storage';
+import { storage } from './storage';
 
 const Axios = axios.create({
   baseURL: '/apis',
